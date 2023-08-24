@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'MontserratAlt1';
+    src: url('/assets/MontserratAlt1-Regular.ttf');
+}
+
+html,
+body {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+.logo {
+    font-family: 'MontserratAlt1' !important;
+}
