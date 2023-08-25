@@ -14,6 +14,12 @@ import { CrmComponent } from './workspace/crm/crm.component';
 import { PimComponent } from './workspace/pim/pim.component';
 import { AttributeManagementComponent } from './workspace/pim/attribute-management/attribute-management.component';
 import { ProductMediaManagementComponent } from './workspace/pim/product-media-management/product-media-management.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { PimService } from './data-access/pim.service';
 
 @NgModule({
   declarations: [
@@ -28,14 +34,17 @@ import { ProductMediaManagementComponent } from './workspace/pim/product-media-m
     ProductMediaManagementComponent,
   ],
   imports: [
+    NgbPaginationModule,
+    NgbAlertModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, PimService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
