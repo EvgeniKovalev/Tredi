@@ -5,15 +5,13 @@
 <table class="table mt-3">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Label</th>
-            <th scope="col">Type</th>
+            <th scope="col">Nimi</th>
+            <th scope="col">Tunnus</th>
+            <th scope="col">Tyyppi</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let attribute of attributes">
-            <th scope="row">1</th>
             <td>{{attribute.name}}</td>
             <td>{{attribute.label}}</td>
             <td>{{attribute.attributeType}}</td>
@@ -30,33 +28,29 @@
     </div>
     <div class="modal-body">
 
-        <div class="row">
-            <div class="col">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col-sm-12 col-md-12 col-lg-6">
                 <div class="mt-3">
                     <label for="exampleInputEmail1" class="form-label">NIMI</label>
                     <input type="email" class="form-control  form-control-lg" [(ngModel)]="currentAttribute.name" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
+                </div>
 
-                  <div class="mt-3">
-                    <label for="exampleInputEmail2" class="form-label">LABEL</label>
+                <div class="mt-3">
+                    <label for="exampleInputEmail2" class="form-label">TUNNUS</label>
                     <input type="email" class="form-control  form-control-lg" [(ngModel)]="currentAttribute.label" id="exampleInputEmail2" aria-describedby="emailHelp">
-                  </div>
+                </div>
 
             </div>
 
-            <div class="col">
-                <h6>Valitse tyyppi</h6>
-                <button class="btn btn-outline-secondary" *ngFor="let enum of attributeTypes | keyvalue" (click)="SetAttrubuteType(currentAttribute, enum.key)">{{ enum.value}}</button>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="mt-3">
+                    <h6>Valitse tyyppi</h6>
+                    <button class="btn btn-sm btn-block btn-outline-secondary mt-2 me-2" *ngFor="let enum of attributeTypes | keyvalue" (click)="SetAttrubuteType(currentAttribute, enum.key)">{{ enum.value}}</button>
+                </div>
             </div>
         </div>
-
-
-
-
-
-
-
     </div>
+
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.dismiss('Close click')">Sulje</button>
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Lisää</button>
