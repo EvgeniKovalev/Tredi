@@ -1,0 +1,10 @@
+<div class="modal-header bg-light">
+    <button type="button" class="btn btn-lg ps-0" aria-label="Close" (click)="activeModal.dismiss('Back click')">
+        < Takaisin</button>
+            <button type="button" class="btn {{ConfirmButtonColorClass}}"
+                (click)="activeModal.close('Close click')">{{ConfirmButtonText}}</button>
+</div>
+<div class="modal-body">
+    <h4 class="modal-title">{{Header}}</h4>
+    <div class="modal-body">{{Body}}</div>
+</div>

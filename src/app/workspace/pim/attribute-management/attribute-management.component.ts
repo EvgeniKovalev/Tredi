@@ -5,6 +5,7 @@ import { PimService } from 'src/app/data-access/pim.service';
 import { Requestor } from 'src/app/data-access/requestor';
 import { Attribute } from 'src/app/models/Attribute';
 import { AttributeTypeEnum } from 'src/app/models/AttributeTypeEnum';
+import { ConfirmDialogComponent } from '../../Shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-attribute-management',
@@ -42,12 +43,6 @@ export class AttributeManagementComponent {
     });
   }
 
-  SetAttrubuteType(attribute: Attribute, enumKey: string) {
-    if (attribute) {
-      attribute.attributeType = Number(enumKey);
-    }
-  }
-
   OpenAddAttribute(content: any) {
     this.modalService.open(content, { fullscreen: true }).result.then(
       (result) => {
@@ -55,7 +50,7 @@ export class AttributeManagementComponent {
           .load(this.pimService.AddAttribute(this.currentAttribute))
           .then((result) => {
             if (!this.requestor.hasError) {
-              this.attributes = result;
+              this.LoadAttributes();
             }
           });
       },
@@ -63,5 +58,66 @@ export class AttributeManagementComponent {
         this.currentAttribute = {} as Attribute;
       }
     );
+  }
+
+  OpenEditAttribute(content: any, attributeToEdit: Attribute) {
+    this.currentAttribute = attributeToEdit;
+    this.modalService.open(content, { fullscreen: true }).result.then(
+      (result) => {
+        this.requestor
+          .load(this.pimService.EditAttribute(this.currentAttribute))
+          .then((result) => {
+            if (!this.requestor.hasError) {
+              this.LoadAttributes();
+            }
+          });
+      },
+      (reason) => {
+        this.currentAttribute = {} as Attribute;
+      }
+    );
+  }
+
+  OpenConfirmDeleteAttribute(attributeToDelete: Attribute) {
+    this.currentAttribute = attributeToDelete;
+    const deleteDialog = this.modalService.open(ConfirmDialogComponent, {
+      fullscreen: true,
+    });
+    deleteDialog.componentInstance.Header =
+      'Poistetanko ominaisuus ' + this.currentAttribute.name + '?';
+    deleteDialog.componentInstance.ConfirmButtonText = 'Poista';
+    deleteDialog.componentInstance.ConfirmButtonColorClass = 'btn-danger';
+
+    deleteDialog.result.then(
+      (result) => {
+        this.requestor
+          .load(this.pimService.DeleteAttribute(this.currentAttribute))
+          .then((result) => {
+            if (!this.requestor.hasError) {
+              this.LoadAttributes();
+            }
+          });
+      },
+      (reason) => {
+        this.currentAttribute = {} as Attribute;
+      }
+    );
+  }
+
+  GetAttributeTypeName(attributeTypeNumber: number) {
+    return AttributeTypeEnum[attributeTypeNumber];
+  }
+
+  IsAttributeType(attribute: Attribute, enumKey: string) {
+    if (attribute) {
+      return Number(attribute.attributeType) === Number(enumKey);
+    }
+    return false;
+  }
+
+  SetAttrubuteType(attribute: Attribute, enumKey: string) {
+    if (attribute) {
+      attribute.attributeType = Number(enumKey);
+    }
   }
 }

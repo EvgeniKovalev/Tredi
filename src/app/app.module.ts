@@ -20,6 +20,7 @@ import {
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { PimService } from './data-access/pim.service';
+import { ConfirmDialogComponent } from './workspace/Shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PimService } from './data-access/pim.service';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    ConfirmDialogComponent,
   ],
   providers: [AuthenticationService, PimService],
   bootstrap: [AppComponent],

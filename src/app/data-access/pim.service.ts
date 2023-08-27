@@ -29,4 +29,24 @@ export class PimService {
       }
     );
   }
+
+  EditAttribute(attributeModel: Attribute) {
+    return this.http.post<string>(
+      environment.apiUrl + '/Pim/EditAttribute',
+      attributeModel,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  DeleteAttribute(attributeModel: Attribute) {
+    return this.http.post<string>(
+      environment.apiUrl + '/Pim/DeleteAttribute',
+      attributeModel,
+      {
+        withCredentials: true,
+      }
+    );
+  }
 }
