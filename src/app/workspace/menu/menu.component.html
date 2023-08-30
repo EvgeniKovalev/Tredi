@@ -1,29 +1,40 @@
-<div class="row">
-    <div class="col-md-12 mt-3 ms-3"><h1 class="logo">TREDI</h1></div>  
-    <div class="col-md-12 mt-2"><a class="btn btn-lg w-100 text-start text-secondary" [routerLink]="[{ outlets: { workspace: ['orders'] } }]">Tilaukset</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Piirteet</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuoteperheet</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kanavat</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuotemedia</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuonti ja vienti</a></div>
 
-    <div class="col-md-12 mt-2 border-top"><a class="btn btn-lg w-100 text-start text-secondary" [routerLink]="[{ outlets: { workspace: ['crm'] } }]">Asiakassuhteet</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kampanjat</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Mainonta</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kanavat</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Jätetyt korit</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuonti ja vienti</a></div>
+    <h1 class="logo mt-3 ms-2">TREDI</h1>
+          <button class="btn btn-md w-100 text-start collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" 
+          aria-controls="contents-collapse">Tilaushallinta</button>
+          <ul class="list-unstyled ps-3 collapse" id="contents-collapse">
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['orders'] } }]">Tilaukset</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Ominaisuudet</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kanavat</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuotemedia</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuonti ja vienti</a></li>
+          </ul>
 
-    <div class="col-md-12 mt-2 border-top"><a class="btn btn-lg w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuotetiedot</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['product-attributes'] } }]">Ominaisuudet</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuoteperheet</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kanavat</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['product-media'] } }]">Tuotemedia</a></div>
-    <div class="col-md-12 mt-1 ps-5"><a class="btn btn-md w-100 text-start text-secondary"  [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuonti ja vienti</a></div>
+          <button class="btn btn-md w-100 text-start collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse" 
+          aria-controls="forms-collapse">Asiakassuhteet</button>
+          <ul class="list-unstyled ps-3 collapse" id="forms-collapse">
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['crm'] } }]">Asiakkaat</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kampanjat</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Mainonta</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kanavat</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Jätetyt korit</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuonti ja vienti</a></li>
+          </ul>
 
-    <div class="col-md-12 mb-5 mt-5 border-top"><a class="btn btn-lg w-100 text-start text-secondary"  [routerLink]="['/login', 0]">Kirjaudu ulos</a></div>
+          <button class="btn btn-md w-100 text-start collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#components-collapse" 
+          aria-controls="components-collapse">Tuotetiedot</button>
+          <ul class="list-unstyled ps-3 collapse" id="components-collapse">
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuotteet(ryhmät)</a></li>
+            <li><a class="btn btn-sm w-100 text-start active" [routerLink]="[{ outlets: { workspace: ['product-attributes'] } }]">Ominaisuudet</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Kanavat</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['product-media'] } }]">Tuotemedia</a></li>
+            <li><a class="btn btn-sm w-100 text-start" [routerLink]="[{ outlets: { workspace: ['pim'] } }]">Tuonti ja vienti</a></li>
+          </ul>
 
-</div>
+      <div class="mb-5"><a class="btn btn-md w-100 border-top text-start"  [routerLink]="['/login', 0]">Kirjaudu ulos</a></div>
+  
+
+
 
 
 

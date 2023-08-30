@@ -1,8 +1,9 @@
-<div class="container-fluid  min-vh-100 d-flex flex-column">
-    <div class="row flex-grow-1">
-        <div class="col-md-2"><app-menu></app-menu></div>
-        <div class="col bg-light pt-5">
-            <router-outlet name="workspace"></router-outlet>
-        </div>
+
+    <div class="sidebar"><app-menu></app-menu></div>
+
+    <div class="content min-vh-100 pt-5">
+        
+        <router-outlet name="workspace"></router-outlet>
+  
     </div>
-</div>
+  

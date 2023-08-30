@@ -22,5 +22,76 @@ body {
     background-color: rgba(0,0,0,.5);
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    text-align: start;
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: #1b1b1b;
+    padding: 16px;
+    text-decoration: none;
+    border-radius: 0%;
+  }
+   
+  .sidebar a.active {
+    background-color: #f0f0f0;
+    color: #1b1b1b;
+    border-radius: 0%;
+    border: none;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #f0f0f0;
+    color: #1b1b1b;
+    border-radius: 0%;
+  }
+
+  .sidebar button {
+    display: block;
+    color: #1b1b1b;
+    padding: 16px;
+    text-decoration: none;
+    border-radius: 0%;
+  }
+   
+  .sidebar button.active {
+    background-color: #04AA6D;
+    color: white;
+    border-radius: 0%;
+  }
+  
+  .sidebar button:hover:not(.active) {
+    background-color: #f0f0f0;
+    color: #1b1b1b;
+    border-radius: 0%;
+  }
+  
+  div.content {
+    background-color: #f0f0f0;
+    margin-left: 200px;
+    padding: 1px 16px;
+   
+  }
+  
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      float: none;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

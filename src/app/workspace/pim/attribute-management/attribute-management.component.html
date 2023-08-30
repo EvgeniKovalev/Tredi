@@ -1,20 +1,26 @@
+
+
 <h4>Ominaisuudet</h4>
 <hr />
-<button class="btn btn-sm btn-success " (click)="OpenAddAttribute(addAttribute)">LISÄÄ UUSI</button>
+<button class="btn btn-sm btn-success " (click)="OpenAddAttribute(addAttribute)">LISÄÄ OMINAISUUS</button>
 
 <div class="list-group mt-3">
     <div class="list-group-item" *ngFor="let attribute of attributes">
-        <div class="d-flex w-100 justify-content-between">
-            <div>
-                <h4 class="">{{attribute.name}}</h4>
-                <small> <span class="ms-3 text-secondary">Näytettävä nimi: </span>{{attribute.label}}</small>
-                <small> <span class="text-secondary">Tyyppi:
-                    </span>{{GetAttributeTypeName(attribute.attributeType)}}</small>
-            </div>
-            <button class="btn btn text-danger" (click)="OpenConfirmDeleteAttribute(attribute)">Poista</button>
+        <h6 class="text-uppercase">{{attribute.name}}</h6>
+
+
+        <div class="d-flex w-100 justify-content-start">  
+            <small> <span class="text-secondary">Näytettävä nimi: </span>{{attribute.label}}</small>   
         </div>
-        <button class="ps-0 btn btn-sm text-primary"
-            (click)="OpenEditAttribute(addAttribute, attribute)">Muokkaa</button>
+        <div class="d-flex w-100 justify-content-between">
+            <div class="d-flex w-100 justify-content-start">  
+                <small> <span class="text-secondary">Tyyppi: </span>{{GetAttributeTypeName(attribute.attributeType)}}</small>
+            </div>
+            <div class="d-flex w-100 justify-content-end">
+                <button class="ps-0 btn btn-sm text-primary"(click)="OpenEditAttribute(addAttribute, attribute)">Muokkaa</button>
+                <button class="btn btn btn-sm text-danger" (click)="OpenConfirmDeleteAttribute(attribute)">Poista</button>
+            </div>
+        </div>
     </div>
 </div>
 
