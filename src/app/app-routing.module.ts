@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
-import { PimComponent } from './workspace/pim/pim.component';
 import { CrmComponent } from './workspace/crm/crm.component';
 import { OrderManagementComponent } from './workspace/order-management/order-management.component';
 import { ProductMediaManagementComponent } from './workspace/pim/product-media-management/product-media-management.component';
 import { AttributeManagementComponent } from './workspace/pim/attribute-management/attribute-management.component';
+import { ProductComponent } from './workspace/pim/product-listing/product.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,8 +16,8 @@ const routes: Routes = [
     component: WorkspaceComponent,
     children: [
       {
-        path: 'pim',
-        component: PimComponent,
+        path: 'product',
+        component: ProductComponent,
         outlet: 'workspace',
       },
       {

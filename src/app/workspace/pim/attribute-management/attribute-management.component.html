@@ -1,28 +1,29 @@
-
-
 <h4>Ominaisuudet</h4>
 <hr />
-<button class="btn btn-sm btn-success " (click)="OpenAddAttribute(addAttribute)">LISÄÄ OMINAISUUS</button>
-
+<button class="btn btn-sm btn-success" (click)="OpenAddAttribute(addAttribute)">LISÄÄ OMINAISUUS</button>
 <div class="list-group mt-3">
     <div class="list-group-item" *ngFor="let attribute of attributes">
         <h6 class="text-uppercase">{{attribute.name}}</h6>
 
 
-        <div class="d-flex w-100 justify-content-start">  
-            <small> <span class="text-secondary">Näytettävä nimi: </span>{{attribute.label}}</small>   
+        <div class="d-flex w-100 justify-content-start">
+            <small> <span class="text-secondary">Näytettävä nimi: </span>{{attribute.label}}</small>
         </div>
         <div class="d-flex w-100 justify-content-between">
-            <div class="d-flex w-100 justify-content-start">  
-                <small> <span class="text-secondary">Tyyppi: </span>{{GetAttributeTypeName(attribute.attributeType)}}</small>
+            <div class="d-flex w-100 justify-content-start">
+                <small> <span class="text-secondary">Tyyppi:
+                    </span>{{GetAttributeTypeName(attribute.attributeType)}}</small>
             </div>
             <div class="d-flex w-100 justify-content-end">
-                <button class="ps-0 btn btn-sm text-primary"(click)="OpenEditAttribute(addAttribute, attribute)">Muokkaa</button>
-                <button class="btn btn btn-sm text-danger" (click)="OpenConfirmDeleteAttribute(attribute)">Poista</button>
+                <button class="ps-0 btn btn-sm text-primary"
+                    (click)="OpenEditAttribute(addAttribute, attribute)">Muokkaa</button>
+                <button class="btn btn btn-sm text-danger"
+                    (click)="OpenConfirmDeleteAttribute(attribute)">Poista</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -49,9 +50,9 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Näytettävä Nimi"
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Näytettävä teksti"
                             [(ngModel)]="currentAttribute.label">
-                        <label for="floatingInput">Näytettävä nimi</label>
+                        <label for="floatingInput">Näytettävä teksti</label>
                     </div>
                 </div>
 

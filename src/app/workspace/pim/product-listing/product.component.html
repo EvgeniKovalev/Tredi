@@ -1,0 +1,109 @@
+<h4>Tuotteet</h4>
+<hr />
+<div class="row">
+  <div class="col">
+    <button class="btn btn-sm btn-success" (click)="OpenAddProduct(addProduct)">LISÄÄ TUOTE</button>
+  </div>
+  <div class="col text-end">
+    <button class="btn btn-sm btn-outline-secondary" (click)="OpenAddProduct(addProduct)">VALITSE OMINAISUUDET</button>
+  </div>
+</div>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Name</th>
+      <th *ngFor="let attribute of listedProductAttributes">{{attribute.name}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <th scope="row"><button class="btn" (click)="OpenEditProduct(addProduct, product)">{{product.id}}</button></th>
+      <td>{{product.name}}</td>
+      <td *ngFor="let attribute of listedProductAttributes">{{GetAttributeValue(attribute, product.attributes)}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #addProduct let-modal>
+  <div class="modal-header bg-light">
+    <button type="button" class="btn btn-lg ps-0" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      < Takaisin</button>
+        <button type="button" class="btn btn-success" (click)="modal.close('Close click')">Tallenna ja
+          sulje</button>
+  </div>
+  <div class="modal-body">
+    <h5>
+      <span *ngIf="!currentProduct.partitionKey">Uusi</span>
+      <span *ngIf="currentProduct.partitionKey">Muokkaa</span>
+      tuote
+    </h5>
+    <div class="row">
+      <div class="col">
+        <div class="mt-3">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Nimi"
+              [(ngModel)]="currentProduct.name">
+            <label for="floatingInput">Nimi</label>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <h5>Ominaisuudet</h5>
+
+          <div class="row mt-5">
+            <div class="col-md-2" *ngIf="freeAttributes && freeAttributes.length > 0">
+              <h6>Valitse ominaisuudet</h6>
+              <ol class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-start"
+                  *ngFor="let attribute of freeAttributes">
+                  <div class="me-auto">
+                    <div class="fw-bold">{{attribute.name}}</div>
+                    <small class="text-secondary">{{GetAttributeTypeName(attribute.attributeType)}}</small>
+                  </div>
+                  <button class="btn btn-sm btn-outline-success" (click)="AddAttributeToProduct(attribute)">LISÄÄ
+                    ></button>
+                </li>
+              </ol>
+            </div>
+
+            <div class="col" *ngIf="currentProduct.attributes && currentProduct.attributes.length > 0">
+              <h6>Tuotteen ominaisuudet</h6>
+              <div class="row">
+
+                <div class="col-md-2 p-3 ms-2 mb-2 border rounded" *ngFor="let attribute of currentProduct.attributes">
+
+                  <div class="row">
+                    <div class="col d-flex justify-content-between align-items-start">
+
+                      <div class="me-auto text-start">
+                        <h5>{{attribute.name}}</h5>
+                        <small class="text-secondary">{{GetAttributeTypeName(attribute.attributeType)}}</small>
+                      </div>
+                      <button class="btn btn-close" (click)="RemoveAttributeFromProduct(attribute)"></button>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Value"
+                          [(ngModel)]="attribute.value">
+                        <label for="floatingInput">{{attribute.label}}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template>

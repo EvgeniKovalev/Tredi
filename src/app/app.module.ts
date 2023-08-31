@@ -11,7 +11,6 @@ import { MenuComponent } from './workspace/menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { OrderManagementComponent } from './workspace/order-management/order-management.component';
 import { CrmComponent } from './workspace/crm/crm.component';
-import { PimComponent } from './workspace/pim/pim.component';
 import { AttributeManagementComponent } from './workspace/pim/attribute-management/attribute-management.component';
 import { ProductMediaManagementComponent } from './workspace/pim/product-media-management/product-media-management.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +19,8 @@ import {
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { PimService } from './data-access/pim.service';
-import { ConfirmDialogComponent } from './workspace/Shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './workspace/shared/confirm-dialog/confirm-dialog.component';
+import { ProductComponent } from './workspace/pim/product-listing/product.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ConfirmDialogComponent } from './workspace/Shared/confirm-dialog/confir
     MenuComponent,
     OrderManagementComponent,
     CrmComponent,
-    PimComponent,
+    ProductComponent,
     AttributeManagementComponent,
     ProductMediaManagementComponent,
   ],

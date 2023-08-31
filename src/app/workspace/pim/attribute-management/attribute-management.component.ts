@@ -5,7 +5,8 @@ import { PimService } from 'src/app/data-access/pim.service';
 import { Requestor } from 'src/app/data-access/requestor';
 import { Attribute } from 'src/app/models/Attribute';
 import { AttributeTypeEnum } from 'src/app/models/AttributeTypeEnum';
-import { ConfirmDialogComponent } from '../../Shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-attribute-management',
@@ -13,6 +14,7 @@ import { ConfirmDialogComponent } from '../../Shared/confirm-dialog/confirm-dial
   styleUrls: ['./attribute-management.component.scss'],
 })
 export class AttributeManagementComponent {
+  private subscriptions = new Subscription();
   private requestor = new Requestor<any>();
   public attributes: Attribute[] = [];
   public currentAttribute: Attribute = {} as Attribute;
@@ -25,6 +27,12 @@ export class AttributeManagementComponent {
     private platformLocation: PlatformLocation,
     private pimService: PimService
   ) {
+    this.subscriptions.add(
+      this.pimService.allAttributes.subscribe(
+        (attr) => (this.attributes = attr)
+      )
+    );
+
     platformLocation.onPopState(() => {
       if (this.modalService.hasOpenModals()) {
         this.modalService.dismissAll();
@@ -32,15 +40,11 @@ export class AttributeManagementComponent {
       }
     });
 
-    this.LoadAttributes();
+    this.pimService.ReloadAttributes();
   }
 
-  LoadAttributes() {
-    this.requestor.load(this.pimService.LoadAttributes()).then((result) => {
-      if (!this.requestor.hasError) {
-        this.attributes = result;
-      }
-    });
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   OpenAddAttribute(content: any) {
@@ -50,7 +54,7 @@ export class AttributeManagementComponent {
           .load(this.pimService.AddAttribute(this.currentAttribute))
           .then((result) => {
             if (!this.requestor.hasError) {
-              this.LoadAttributes();
+              this.pimService.ReloadAttributes();
             }
           });
       },
@@ -68,7 +72,7 @@ export class AttributeManagementComponent {
           .load(this.pimService.EditAttribute(this.currentAttribute))
           .then((result) => {
             if (!this.requestor.hasError) {
-              this.LoadAttributes();
+              this.pimService.ReloadAttributes();
             }
           });
       },
@@ -94,7 +98,7 @@ export class AttributeManagementComponent {
           .load(this.pimService.DeleteAttribute(this.currentAttribute))
           .then((result) => {
             if (!this.requestor.hasError) {
-              this.LoadAttributes();
+              this.pimService.ReloadAttributes();
             }
           });
       },
