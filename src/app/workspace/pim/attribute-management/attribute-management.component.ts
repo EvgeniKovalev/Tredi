@@ -7,6 +7,8 @@ import { Attribute } from 'src/app/models/Attribute';
 import { AttributeTypeEnum } from 'src/app/models/AttributeTypeEnum';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { Subscription } from 'rxjs';
+import { AttributeOption } from 'src/app/models/AttributeOption';
+import { AttributeOptionTypeEnum } from 'src/app/models/AttributeOptionTypeEnum';
 
 @Component({
   selector: 'app-attribute-management',
@@ -18,7 +20,11 @@ export class AttributeManagementComponent {
   private requestor = new Requestor<any>();
   public attributes: Attribute[] = [];
   public currentAttribute: Attribute = {} as Attribute;
+  public currentAttributeOption: AttributeOption = { name: '', selected: false, attributeOptionType: AttributeOptionTypeEnum.TEXT };
   public attributeTypes = Object.keys(AttributeTypeEnum).filter((element) => {
+    return isNaN(Number(element));
+  });
+  public attributeOptionTypes = Object.keys(AttributeOptionTypeEnum).filter((element) => {
     return isNaN(Number(element));
   });
 
@@ -112,6 +118,10 @@ export class AttributeManagementComponent {
     return AttributeTypeEnum[attributeTypeNumber];
   }
 
+  GetOptionTypeName(attributeTypeNumber: number) {
+    return AttributeOptionTypeEnum[attributeTypeNumber];
+  }
+
   IsAttributeType(attribute: Attribute, enumKey: string) {
     if (attribute) {
       return Number(attribute.attributeType) === Number(enumKey);
@@ -119,9 +129,81 @@ export class AttributeManagementComponent {
     return false;
   }
 
-  SetAttrubuteType(attribute: Attribute, enumKey: string) {
-    if (attribute) {
-      attribute.attributeType = Number(enumKey);
+  SetAttrubuteType(enumKey: string) {
+    if (this.currentAttribute) {
+      if (this.currentAttribute.value) {
+        if (confirm("Vaihtamalla ominaisuuden tyypin, menetät edellisen tyypin valintoja. Jatketaanko?")) {
+          this.currentAttribute.value = '';
+          this.currentAttribute.attributeType = Number(enumKey);
+        }
+      }
+      else {
+        this.currentAttribute.attributeType = Number(enumKey);
+      }
+    }
+  }
+
+  GetAttributesToTrack(): Attribute[] {
+    return this.attributes.filter(a => a.id != this.currentAttribute.id);
+  }
+
+  TrackedAttributeAlreadyAdded(attribute: Attribute) {
+    var added = false;
+    if (attribute && this.currentAttribute && this.currentAttribute.value) {
+      var existingAttributeIndex = (this.currentAttribute.value as Attribute[]).findIndex(a => a.id === attribute.id);
+      added = existingAttributeIndex >= 0;
+    }
+    return added;
+  }
+
+  AddRemoveTrackedAttribute(attribute: Attribute) {
+    if (attribute && this.currentAttribute) {
+      if (!this.currentAttribute.value) {
+        this.currentAttribute.value = [];
+        this.currentAttribute.value.push(attribute);
+      }
+      else {
+        var existingAttributeIndex = (this.currentAttribute.value as Attribute[]).
+          findIndex(a => a.id === attribute.id);
+        if (existingAttributeIndex >= 0) {
+          (this.currentAttribute.value as Attribute[]).splice(existingAttributeIndex, 1);
+        }
+        else {
+          this.currentAttribute.value.push(attribute);
+        }
+      }
+    }
+  }
+
+  AddAttributeOption() {
+    if (this.currentAttribute && this.currentAttributeOption) {
+      if (!this.currentAttribute.value) {
+        this.currentAttribute.value = []
+        this.currentAttribute.value.push(this.currentAttributeOption);
+      }
+      else {
+        var existingOptionIndex = (this.currentAttribute.value as AttributeOption[]).
+          findIndex(a => a.name === this.currentAttributeOption.name);
+
+        if (existingOptionIndex < 0) {
+          this.currentAttribute.value.push(this.currentAttributeOption);
+        }
+      }
+      this.currentAttributeOption = {} as AttributeOption;
+    }
+  }
+
+  SetAttributeOptionToEdit(attributeOption: AttributeOption) {
+    (this.currentAttribute.value as AttributeOption[]).forEach(option => {
+      option.selected = (option.name == attributeOption.name);
+    });
+  }
+
+  RemoveAttributeOption(attributeOption: AttributeOption) {
+    var existingOptionIndex = (this.currentAttribute.value as AttributeOption[]).
+      findIndex(a => a.name === attributeOption.name);
+    if (existingOptionIndex >= 0) {
+      (this.currentAttribute.value as AttributeOption[]).splice(existingOptionIndex, 1);
     }
   }
 }

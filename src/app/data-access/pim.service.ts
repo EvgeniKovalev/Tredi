@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Requestor } from './requestor';
-import { Router } from '@angular/router';
 import { Attribute } from '../models/Attribute';
 import { Product } from '../models/Product';
 import { BehaviorSubject } from 'rxjs';
+import { AttributeTypeEnum } from '../models/AttributeTypeEnum';
+import { AttributeOption } from '../models/AttributeOption';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +28,18 @@ export class PimService {
           withCredentials: true,
         })
       )
-      .then((result) => {
+      .then((result: Attribute[]) => {
         if (!this.requestor.hasError) {
+          result.forEach(attribute => {
+            if (attribute.attributeType === AttributeTypeEnum.COMPLETENESS) {
+              attribute.value = JSON.parse(attribute.valueStr) as Attribute[];
+            }
+
+            if (attribute.attributeType === AttributeTypeEnum.SINGLESELECT ||
+              attribute.attributeType === AttributeTypeEnum.MULTISELECT) {
+              attribute.value = JSON.parse(attribute.valueStr) as AttributeOption[];
+            }
+          });
           this.attributeSource.next(result);
         }
       });
@@ -45,6 +56,9 @@ export class PimService {
   }
 
   EditAttribute(attributeModel: Attribute) {
+    if (attributeModel.value) {
+      attributeModel.valueStr = JSON.stringify(attributeModel.value);
+    }
     return this.http.post<string>(
       environment.apiUrl + '/Pim/EditAttribute',
       attributeModel,

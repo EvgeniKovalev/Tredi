@@ -33,12 +33,11 @@ export class ProductComponent {
         window.history.forward();
       }
     });
-    this.subscriptions.add(
-      this.pimService.allAttributes.subscribe(
-        (attr) => (this.allAttributes = attr)
-      )
+    this.subscriptions.add(this.pimService.allAttributes.subscribe((attr) => {
+      this.allAttributes = attr
+      this.LoadProducts();
+    })
     );
-    this.LoadProducts();
   }
 
   ngOnDestroy() {
@@ -82,7 +81,7 @@ export class ProductComponent {
   RemoveAttributeFromProduct(attribute: Attribute) {
     this.currentProduct.attributes?.forEach((a, index) => {
       if (a.id === attribute.id) {
-        attribute.value = null;
+        attribute.value = {} as string;
         this.currentProduct.attributes?.splice(index, 1);
       }
     });

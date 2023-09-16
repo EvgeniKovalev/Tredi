@@ -1,11 +1,9 @@
 <h4>Ominaisuudet</h4>
 <hr />
 <button class="btn btn-sm btn-success" (click)="OpenAddAttribute(addAttribute)">LISÄÄ OMINAISUUS</button>
-<div class="list-group mt-3">
+<div class="list-group mt-3" *ngIf="attributes.length > 0">
     <div class="list-group-item" *ngFor="let attribute of attributes">
         <h6 class="text-uppercase">{{attribute.name}}</h6>
-
-
         <div class="d-flex w-100 justify-content-start">
             <small> <span class="text-secondary">Näytettävä nimi: </span>{{attribute.label}}</small>
         </div>
@@ -40,7 +38,7 @@
             <span *ngIf="currentAttribute.partitionKey">Muokkaa</span>
             ominaisuus
         </h4>
-        <div class="row">
+        <div class="row pb-4">
             <div class="col">
                 <div class="mt-3">
                     <div class="form-floating mb-3">
@@ -58,10 +56,71 @@
 
                 <div class="mt-5">
                     <h6>Valitse tyyppi</h6>
-                    <button class="btn btn-sm btn-block btn-outline-secondary mt-2 me-2"
+                    <button class="btn btn-sm btn-block btn-outline-secondary pt-5 pb-5 mt-2 me-2"
                         *ngFor="let enum of attributeTypes | keyvalue"
                         [ngClass]="{active: IsAttributeType(currentAttribute, enum.key)}"
-                        (click)="SetAttrubuteType(currentAttribute, enum.key)">{{ enum.value}}</button>
+                        (click)="SetAttrubuteType(enum.key)">{{ enum.value}}</button>
+                </div>
+
+                <div class="mt-5 w-50">
+                    <div *ngIf="currentAttribute.attributeType === 6 || currentAttribute.attributeType === 7">
+                        <h6>Lisää valintoja</h6>
+                        <div class="form-floating input-group mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Valinnan nimi"
+                                [(ngModel)]="currentAttributeOption.name">
+                            <label for="floatingInput">Kirjoita valinnan nimi</label>
+                            <select class="input-control w-25 ps-3"
+                                [(ngModel)]="currentAttributeOption.attributeOptionType">
+                                <option *ngFor="let enum of attributeOptionTypes | keyvalue" value="{{ enum.key }}">{{
+                                    enum.value}}</option>
+                            </select>
+                            <button class="btn btn-secondary" type="button"
+                                (click)="AddAttributeOption()">Lisää</button>
+                        </div>
+
+                        <div class="list-group mt-3">
+                            <div class="list-group-item" *ngFor="let attributeOption of currentAttribute.value">
+                                <div *ngIf="!attributeOption.selected" class="d-flex w-100 justify-content-between">
+                                    <div><span>{{attributeOption.name}}</span><br />
+                                        <small
+                                            class="text-muted">{{GetOptionTypeName(attributeOption.attributeOptionType)}}</small>
+                                    </div>
+                                    <div> <button class="ps-0 btn btn-sm text-primary"
+                                            (click)="SetAttributeOptionToEdit(attributeOption)">Muokkaa</button>
+                                        <button class="btn btn btn-sm text-danger"
+                                            (click)="RemoveAttributeOption(attributeOption)">Poista</button>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="attributeOption.selected" class="input-group">
+                                    <input type="text" class="form-control" placeholder="Valinnan nimi"
+                                        [(ngModel)]="attributeOption.name" />
+                                    <select class="input-control w-25 ps-3"
+                                        [(ngModel)]="attributeOption.attributeOptionType">
+                                        <option *ngFor="let enum of attributeOptionTypes | keyvalue"
+                                            value="{{ enum.key }}">{{
+                                            enum.value}}</option>
+                                    </select>
+                                    <button class="btn btn-sm text-success"
+                                        (click)="attributeOption.selected = false">Valmis</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="currentAttribute.attributeType === 8">
+                        <h6>Valitse ominaisuudet joita haluat seurata</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between"
+                                *ngFor="let attribute of GetAttributesToTrack()">
+                                <label class="form-check-label stretched-link"
+                                    for="chb_attr_{{attribute.id}}">{{attribute.name}}</label>
+                                <input class="form-check-input me-1" type="checkbox"
+                                    [checked]="TrackedAttributeAlreadyAdded(attribute)"
+                                    (change)="AddRemoveTrackedAttribute(attribute)" id="chb_attr_{{attribute.id}}">
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

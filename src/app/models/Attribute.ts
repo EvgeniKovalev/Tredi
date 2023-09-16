@@ -6,5 +6,6 @@ export interface Attribute {
   name: string;
   label: string;
   attributeType: AttributeTypeEnum;
-  value?: any;
+  valueStr: string;
+  value: any;
 }
