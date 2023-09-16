@@ -54,7 +54,6 @@ export class ProductComponent {
         // Mapping attributes
         this.products.forEach((p) => {
           p.attributes?.forEach(attr => {
-
             if (!this.listedProductAttributes.find(la => la.id === attr.id)) {
               this.listedProductAttributes.push(attr);
             }
@@ -65,6 +64,7 @@ export class ProductComponent {
               attr.name = attribute.name;
               attr.label = attribute.label;
               attr.attributeType = attribute.attributeType;
+              attr.value = attribute.value;
             }
           });
         });

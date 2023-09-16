@@ -8,7 +8,6 @@ import { AttributeTypeEnum } from 'src/app/models/AttributeTypeEnum';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { Subscription } from 'rxjs';
 import { AttributeOption } from 'src/app/models/AttributeOption';
-import { AttributeOptionTypeEnum } from 'src/app/models/AttributeOptionTypeEnum';
 
 @Component({
   selector: 'app-attribute-management',
@@ -20,11 +19,8 @@ export class AttributeManagementComponent {
   private requestor = new Requestor<any>();
   public attributes: Attribute[] = [];
   public currentAttribute: Attribute = {} as Attribute;
-  public currentAttributeOption: AttributeOption = { name: '', selected: false, attributeOptionType: AttributeOptionTypeEnum.TEXT };
+  public currentAttributeOption: AttributeOption = {} as AttributeOption;
   public attributeTypes = Object.keys(AttributeTypeEnum).filter((element) => {
-    return isNaN(Number(element));
-  });
-  public attributeOptionTypes = Object.keys(AttributeOptionTypeEnum).filter((element) => {
     return isNaN(Number(element));
   });
 
@@ -116,10 +112,6 @@ export class AttributeManagementComponent {
 
   GetAttributeTypeName(attributeTypeNumber: number) {
     return AttributeTypeEnum[attributeTypeNumber];
-  }
-
-  GetOptionTypeName(attributeTypeNumber: number) {
-    return AttributeOptionTypeEnum[attributeTypeNumber];
   }
 
   IsAttributeType(attribute: Attribute, enumKey: string) {
