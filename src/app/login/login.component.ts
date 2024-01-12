@@ -7,8 +7,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
   private subscriptions = new Subscription();
@@ -32,7 +31,7 @@ export class LoginComponent {
     this.subscriptions.add(
       this.route.paramMap.subscribe((params: ParamMap) => {
         if (params.get('direction') === '0') {
-          this.requestor.load(this.authService.logout()).then((p) => {});
+          this.requestor.load(this.authService.logout()).then((p) => { });
         } else {
           this.checkLoggedIn();
         }

@@ -21,6 +21,7 @@ import {
 import { PimService } from './data-access/pim.service';
 import { ConfirmDialogComponent } from './workspace/shared/confirm-dialog/confirm-dialog.component';
 import { ProductComponent } from './workspace/pim/product-listing/product.component';
+import { ProductGroupsComponent } from './workspace/pim/product-groups/product-groups.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ProductComponent } from './workspace/pim/product-listing/product.compon
     ProductComponent,
     AttributeManagementComponent,
     ProductMediaManagementComponent,
+    ProductGroupsComponent,
   ],
   imports: [
     NgbPaginationModule,
@@ -49,4 +51,4 @@ import { ProductComponent } from './workspace/pim/product-listing/product.compon
   providers: [AuthenticationService, PimService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

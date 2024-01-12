@@ -4,8 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   standalone: true,
   selector: 'app-confirm-dialog',
-  templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.scss'],
+  templateUrl: './confirm-dialog.component.html'
 })
 export class ConfirmDialogComponent {
   @Input() Header: string = '';
@@ -13,5 +12,5 @@ export class ConfirmDialogComponent {
   @Input() ConfirmButtonText: string = '';
   @Input() ConfirmButtonColorClass: string = '';
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) { }
 }

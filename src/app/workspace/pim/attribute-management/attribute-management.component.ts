@@ -11,8 +11,7 @@ import { AttributeOption } from 'src/app/models/AttributeOption';
 
 @Component({
   selector: 'app-attribute-management',
-  templateUrl: './attribute-management.component.html',
-  styleUrls: ['./attribute-management.component.scss'],
+  templateUrl: './attribute-management.component.html'
 })
 export class AttributeManagementComponent {
   private subscriptions = new Subscription();

@@ -21,7 +21,7 @@
       <th scope="row"><button class="btn pt-0 pb-0"
           (click)="OpenEditProduct(addProduct, product)">{{product.id}}</button></th>
       <td>{{product.name}}</td>
-      <td *ngFor="let attribute of listedProductAttributes">{{GetAttributeValue(attribute, product.attributes)}}</td>
+      <td *ngFor="let attribute of listedProductAttributes"></td>
     </tr>
   </tbody>
 </table>
@@ -72,17 +72,16 @@
               <div class="row">
                 <div class="col-md-2 p-3 ms-2 mb-2 bg-light border rounded"
                   *ngFor="let attribute of currentProduct.attributes">
-                  <div class="row">
+                  <div class="row pb-2">
                     <div class="col d-flex justify-content-between align-items-start">
                       <div class="me-auto text-start">{{attribute.name}}</div>
                       <button class="btn btn-close" (click)="RemoveAttributeFromProduct(attribute)"></button>
                     </div>
-                    <hr />
                   </div>
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <span>{{attribute.label}}</span><br />
+                        <small class="text-muted">{{attribute.label}}</small><br />
                         <div *ngIf="([0,1,2,3,4,5].indexOf(attribute.attributeType) >= 0)">
                           <input type="text" class="form-control" [(ngModel)]="attribute.value" />
                         </div>

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-order-management',
-  templateUrl: './order-management.component.html',
-  styleUrls: ['./order-management.component.scss']
+  templateUrl: './order-management.component.html'
 })
 export class OrderManagementComponent {
 

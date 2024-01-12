@@ -7,6 +7,7 @@ import { OrderManagementComponent } from './workspace/order-management/order-man
 import { ProductMediaManagementComponent } from './workspace/pim/product-media-management/product-media-management.component';
 import { AttributeManagementComponent } from './workspace/pim/attribute-management/attribute-management.component';
 import { ProductComponent } from './workspace/pim/product-listing/product.component';
+import { ProductGroupsComponent } from './workspace/pim/product-groups/product-groups.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +19,11 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductComponent,
+        outlet: 'workspace',
+      },
+      {
+        path: 'product-groups',
+        component: ProductGroupsComponent,
         outlet: 'workspace',
       },
       {
@@ -48,4 +54,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
