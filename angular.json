@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Tredi:build:production"
+              "buildTarget": "Tredi:build:production"
             },
             "development": {
-              "browserTarget": "Tredi:build:development"
+              "buildTarget": "Tredi:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Tredi:build"
+            "buildTarget": "Tredi:build"
           }
         },
         "test": {
